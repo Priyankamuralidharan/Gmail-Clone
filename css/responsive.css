@@ -1,0 +1,37 @@
+@media (max-width: 768px) {
+  #sidebar {
+    position: fixed;
+    left: -240px;
+    top: 64px;
+    height: calc(100vh - 64px);
+    transition: left 0.3s;
+    z-index: 500;
+  }
+
+  #sidebar.open {
+    left: 0;
+  }
+
+  .topbar-search {
+    display: none;
+  }
+
+  .main-layout {
+    flex-direction: column;
+  }
+
+  #readingPane {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 400;
+  }
+
+  #composeModal {
+    width: 100%;
+    right: 0;
+  }
+}
