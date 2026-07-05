@@ -1,0 +1,39 @@
+cssbody.dark-mode {
+  background: #202124;
+  color: #e8eaed;
+}
+
+body.dark-mode #topbar,
+body.dark-mode #sidebar,
+body.dark-mode #emailListContainer,
+body.dark-mode #readingPane,
+body.dark-mode #composeModal {
+  background: #2d2e30;
+  color: #e8eaed;
+  border-color: #3c4043;
+}
+
+body.dark-mode .email-item {
+  border-color: #3c4043;
+}
+
+body.dark-mode .folder-item.active {
+  background: #3c4043;
+}
+
+body.dark-mode .topbar-search input {
+  background: #3c4043;
+  color: #e8eaed;
+}
+
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 1000;
+}
