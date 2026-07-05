@@ -1,154 +1,144 @@
-jsconst defaultEmails = [
+/* data/defaultEmails.js
+   Initial dummy inbox data. Loaded once into localStorage by storage.js
+   Each email: id, from, fromEmail, avatarColor, avatarText, subject, snippet,
+   body, time, date (ISO), read, starred, important, folder, labels[]
+*/
+
+const DEFAULT_EMAILS = [
   {
-    id: "1",
-    from: "amazon@amazon.in",
-    to: "user@gmail.com",
-    subject: "Your order has shipped",
-    body: "Your recent order is on its way.",
-    date: "2026-07-01T10:00:00Z",
+    id: "e1",
+    from: "Google",
+    fromEmail: "no-reply@google.com",
+    avatarColor: "#1a73e8",
+    avatarText: "G",
+    subject: "Security alert for your account",
+    snippet: "A new sign-in on Windows device — if this was you, no action is needed.",
+    body: "Hi,\n\nWe noticed a new sign-in to your account from a Windows device. If this was you, you don't need to do anything. If not, we recommend you secure your account immediately.\n\nDevice: Windows 11\nLocation: Chennai, India\nTime: Just now\n\n— The Google Accounts Team",
+    time: "9:41 AM",
+    date: new Date().toISOString(),
     read: false,
     starred: false,
-    folder: "inbox"
+    important: true,
+    folder: "inbox",
+    labels: ["important"]
   },
   {
-    id: "2",
-    from: "hr@company.com",
-    to: "user@gmail.com",
-    subject: "Meeting Reminder",
-    body: "Don't forget the 3 PM meeting.",
-    date: "2026-07-02T09:30:00Z",
-    read: true,
+    id: "e2",
+    from: "Priya Sharma",
+    fromEmail: "priya.sharma@company.com",
+    avatarColor: "#8e24aa",
+    avatarText: "P",
+    subject: "Project Nova — final review before launch",
+    snippet: "Hey team, attaching the final deck for tomorrow's launch review meeting...",
+    body: "Hey team,\n\nAttaching the final deck for tomorrow's launch review meeting. Please go through slides 12–18 carefully, that's where the rollout plan changed.\n\nSee you at 10 AM.\n\nThanks,\nPriya",
+    time: "8:15 AM",
+    date: new Date(Date.now() - 3600 * 1000).toISOString(),
+    read: false,
     starred: true,
-    folder: "inbox"
+    important: true,
+    folder: "inbox",
+    labels: ["work"]
   },
   {
-    id: "3",
-    from: "user@gmail.com",
-    to: "friend@gmail.com",
-    subject: "Weekend plans",
-    body: "Are we still on for Saturday?",
-    date: "2026-07-03T14:00:00Z",
+    id: "e3",
+    from: "LinkedIn",
+    fromEmail: "notifications@linkedin.com",
+    avatarColor: "#0a66c2",
+    avatarText: "in",
+    subject: "You appeared in 12 searches this week",
+    snippet: "See who's been looking at your profile and grow your network.",
+    body: "Hi,\n\nYour profile appeared in 12 searches this week. People from Google, Microsoft, and Amazon viewed your profile.\n\nKeep your profile updated to appear in more relevant searches.\n\n— LinkedIn Team",
+    time: "Yesterday",
+    date: new Date(Date.now() - 86400 * 1000).toISOString(),
     read: true,
     starred: false,
-    folder: "sent"
+    important: false,
+    folder: "inbox",
+    labels: ["social"]
+  },
+  {
+    id: "e4",
+    from: "Amazon",
+    fromEmail: "shipment-tracking@amazon.in",
+    avatarColor: "#ff9900",
+    avatarText: "A",
+    subject: "Your package has shipped!",
+    snippet: "Your order #402-1938271 is on its way and will arrive by Thursday.",
+    body: "Hello,\n\nGreat news! Your order #402-1938271 has shipped and is expected to arrive by Thursday.\n\nTrack your package anytime from Your Orders.\n\nThank you for shopping with us.",
+    time: "Yesterday",
+    date: new Date(Date.now() - 90000 * 1000).toISOString(),
+    read: true,
+    starred: false,
+    important: false,
+    folder: "inbox",
+    labels: ["updates"]
+  },
+  {
+    id: "e5",
+    from: "Rahul Verma",
+    fromEmail: "rahul.verma@gmail.com",
+    avatarColor: "#00897b",
+    avatarText: "R",
+    subject: "Weekend trip plan 🏔️",
+    snippet: "Are we still on for the Ooty trip this weekend? Let me know the headcount.",
+    body: "Hey!\n\nAre we still on for the Ooty trip this weekend? I need to know the final headcount to book the homestay.\n\nAlso, should we take two cars or rent a van?\n\nLet me know soon!\n\n— Rahul",
+    time: "Jul 3",
+    date: new Date(Date.now() - 2 * 86400 * 1000).toISOString(),
+    read: false,
+    starred: false,
+    important: false,
+    folder: "inbox",
+    labels: ["personal"]
+  },
+  {
+    id: "e6",
+    from: "GitHub",
+    fromEmail: "notifications@github.com",
+    avatarColor: "#24292e",
+    avatarText: "gh",
+    subject: "[gmail-clone] Pull request #14 merged",
+    snippet: "Your pull request 'Add dark mode support' has been merged into main.",
+    body: "Your pull request #14 'Add dark mode support' was merged into main by a collaborator.\n\nView the changes on GitHub.",
+    time: "Jul 2",
+    date: new Date(Date.now() - 3 * 86400 * 1000).toISOString(),
+    read: true,
+    starred: false,
+    important: false,
+    folder: "inbox",
+    labels: ["updates"]
+  },
+  {
+    id: "e7",
+    from: "Netflix",
+    fromEmail: "info@netflix.com",
+    avatarColor: "#e50914",
+    avatarText: "N",
+    subject: "New this week: shows picked for you",
+    snippet: "Fresh recommendations based on what you've been watching lately.",
+    body: "Hi,\n\nHere's what's new this week, picked just for you based on your watch history.\n\nHappy watching!\n— The Netflix Team",
+    time: "Jul 1",
+    date: new Date(Date.now() - 4 * 86400 * 1000).toISOString(),
+    read: true,
+    starred: false,
+    important: false,
+    folder: "inbox",
+    labels: ["promotions"]
+  },
+  {
+    id: "e8",
+    from: "HR Team",
+    fromEmail: "hr@company.com",
+    avatarColor: "#3949ab",
+    avatarText: "HR",
+    subject: "Reminder: Submit your timesheet",
+    snippet: "This is a friendly reminder to submit your timesheet before Friday 5 PM.",
+    body: "Hi,\n\nThis is a friendly reminder to submit your timesheet for this week before Friday 5 PM.\n\nLate submissions may delay payroll processing.\n\nThanks,\nHR Team",
+    time: "Jun 30",
+    date: new Date(Date.now() - 5 * 86400 * 1000).toISOString(),
+    read: true,
+    starred: true,
+    important: true,
+    folder: "inbox",
+    labels: ["work"]
   }
 ];
-js\storage.js
-jsconst STORAGE_KEY = "emails";
-
-function initializeStorage() {
-  const existing = localStorage.getItem(STORAGE_KEY);
-  if (!existing) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultEmails));
-  }
-}
-
-function getAllEmails() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-}
-
-function saveAllEmails(emails) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(emails));
-}
-
-function getEmailById(id) {
-  return getAllEmails().find(email => email.id === id);
-}
-
-function updateEmail(id, updates) {
-  const emails = getAllEmails();
-  const index = emails.findIndex(e => e.id === id);
-  if (index !== -1) {
-    emails[index] = { ...emails[index], ...updates };
-    saveAllEmails(emails);
-  }
-}
-
-function addEmail(email) {
-  const emails = getAllEmails();
-  emails.push(email);
-  saveAllEmails(emails);
-}
-
-function deleteEmailPermanently(id) {
-  const emails = getAllEmails().filter(e => e.id !== id);
-  saveAllEmails(emails);
-}
-js\folders.js
-jslet currentFolder = "inbox";
-
-function switchFolder(folderName) {
-  currentFolder = folderName;
-
-  document.querySelectorAll('.folder-item').forEach(item => {
-    item.classList.toggle('active', item.dataset.folder === folderName);
-  });
-
-  document.getElementById('currentFolderLabel').textContent =
-    folderName.charAt(0).toUpperCase() + folderName.slice(1);
-
-  renderEmailList(folderName);
-}
-
-document.querySelectorAll('.folder-item').forEach(item => {
-  item.addEventListener('click', () => switchFolder(item.dataset.folder));
-});
-js\emails.js
-jsfunction renderEmailList(folder) {
-  const emails = getAllEmails().filter(e => e.folder === folder);
-  const listEl = document.getElementById('emailList');
-  listEl.innerHTML = '';
-
-  if (emails.length === 0) {
-    listEl.innerHTML = '<li class="empty-state">No emails here</li>';
-    return;
-  }
-
-  emails.forEach(email => {
-    const li = document.createElement('li');
-    li.className = 'email-item' + (email.read ? '' : ' unread');
-    li.dataset.id = email.id;
-    li.innerHTML = `
-      <span class="star-icon" data-id="${email.id}">${email.starred ? '⭐' : '☆'}</span>
-      <span class="email-from">${email.from}</span>
-      <span class="email-subject">${email.subject}</span>
-      <span class="email-date">${new Date(email.date).toLocaleDateString()}</span>
-    `;
-    li.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('star-icon')) {
-        openEmail(email.id);
-      }
-    });
-    listEl.appendChild(li);
-  });
-}
-
-function openEmail(id) {
-  updateEmail(id, { read: true });
-  const email = getEmailById(id);
-  document.getElementById('readingPane').classList.remove('hidden');
-  document.getElementById('emailDetail').innerHTML = `
-    <h2>${email.subject}</h2>
-    <p><strong>From:</strong> ${email.from}</p>
-    <p><strong>To:</strong> ${email.to}</p>
-    <hr>
-    <p>${email.body}</p>
-  `;
-  renderEmailList(currentFolder);
-}
-js\app.js
-jsdocument.addEventListener('DOMContentLoaded', () => {
-  const user = localStorage.getItem('currentUser');
-  if (!user) {
-    window.location.href = 'index.html';
-    return;
-  }
-
-  initializeStorage();
-  renderEmailList('inbox');
-
-  const profileEmail = document.getElementById('profileEmail');
-  if (profileEmail) {
-    profileEmail.textContent = JSON.parse(user).email;
-  }
-});

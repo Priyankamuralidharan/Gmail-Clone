@@ -1,44 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gmail Clone - Sign In</title>
-  <link rel="stylesheet" href="css/login.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign in - Gmail Clone</title>
+<link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
 
-  <div class="login-container">
-    <div class="login-box">
-      <img src="assets/icons/gmail-logo.png" alt="Gmail" class="logo">
+  <header class="login-header">
+    <svg class="google-logo" viewBox="0 0 74 24" xmlns="http://www.w3.org/2000/svg" aria-label="Google">
+      <text x="0" y="19" font-family="Product Sans, Arial, sans-serif" font-size="22">
+        <tspan fill="#4285F4">G</tspan><tspan fill="#EA4335">o</tspan><tspan fill="#FBBC05">o</tspan><tspan fill="#4285F4">g</tspan><tspan fill="#34A853">l</tspan><tspan fill="#EA4335">e</tspan>
+      </text>
+    </svg>
+  </header>
+
+  <main class="login-card" id="loginCard">
+
+    <!-- STEP 1: Email -->
+    <section class="step" id="stepEmail">
       <h1>Sign in</h1>
-      <p class="subtitle">Use your Account</p>
+      <p class="subtitle">Use your Google Account</p>
 
-      <form id="loginForm">
-        <div class="input-group">
-          <input type="email" id="email" placeholder="Email" required>
-          <span class="error-message" id="emailError"></span>
-        </div>
+      <div class="field">
+        <input type="email" id="emailInput" placeholder=" " autocomplete="username" />
+        <label for="emailInput">Email or phone</label>
+      </div>
+      <span class="error-msg" id="emailError"></span>
 
-        <div class="input-group">
-          <input type="password" id="password" placeholder="Password" required>
-          <span class="error-message" id="passwordError"></span>
-        </div>
+      <a href="#" class="link-btn">Forgot email?</a>
 
-        <div class="remember-me">
-          <input type="checkbox" id="rememberMe">
-          <label for="rememberMe">Remember me</label>
-        </div>
+      <p class="privacy-note">
+        Not your computer? Use Guest mode to sign in privately.
+        <a href="#">Learn more about using Guest mode</a>
+      </p>
 
-        <div class="login-actions">
-          <a href="#" class="forgot-link">Forgot password?</a>
-          <button type="submit" id="loginBtn">Next</button>
-        </div>
-      </form>
+      <div class="actions">
+        <a href="#" class="text-btn">Create account</a>
+        <button class="next-btn" id="nextBtn">Next</button>
+      </div>
+    </section>
 
-      <p id="loginStatus" class="status-message"></p>
+    <!-- STEP 2: Password -->
+    <section class="step hidden" id="stepPassword">
+      <h1>Welcome</h1>
+      <p class="subtitle" id="userChip"></p>
+
+      <div class="field">
+        <input type="password" id="passwordInput" placeholder=" " autocomplete="current-password" />
+        <label for="passwordInput">Enter your password</label>
+      </div>
+      <span class="error-msg" id="passError"></span>
+
+      <label class="show-pass">
+        <input type="checkbox" id="showPassword" /> Show password
+      </label>
+
+      <div class="actions">
+        <a href="#" class="text-btn" id="backBtn">Back</a>
+        <button class="next-btn" id="signInBtn">Sign in</button>
+      </div>
+
+      <p class="hint">Demo: any password with 4+ characters works.</p>
+    </section>
+
+  </main>
+
+  <footer class="login-footer">
+    <select class="lang-select">
+      <option>English (United States)</option>
+    </select>
+    <div class="footer-links">
+      <a href="#">Help</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
     </div>
-  </div>
+  </footer>
 
   <script src="js/login.js"></script>
 </body>

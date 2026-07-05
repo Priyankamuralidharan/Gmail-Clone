@@ -1,100 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gmail Clone - Inbox</title>
-  <link rel="stylesheet" href="css/topbar.css">
-  <link rel="stylesheet" href="css/sidebar.css">
-  <link rel="stylesheet" href="css/inbox.css">
-  <link rel="stylesheet" href="css/compose.css">
-  <link rel="stylesheet" href="css/email.css">
-  <link rel="stylesheet" href="css/darkmode.css">
-  <link rel="stylesheet" href="css/responsive.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inbox - Gmail Clone</title>
+<link rel="stylesheet" href="css/topbar.css" />
+<link rel="stylesheet" href="css/sidebar.css" />
+<link rel="stylesheet" href="css/inbox.css" />
+<link rel="stylesheet" href="css/email.css" />
+<link rel="stylesheet" href="css/compose.css" />
+<link rel="stylesheet" href="css/darkmode.css" />
+<link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
 
-  <!-- TOP BAR -->
-  <header id="topbar">
-    <div class="topbar-left">
-      <button id="menuToggle" class="icon-btn">☰</button>
-      <img src="assets/icons/gmail-logo.png" alt="Gmail" class="topbar-logo">
-      <span class="topbar-title">Gmail</span>
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="icon-btn" id="menuBtn" title="Main menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+    <div class="brand">
+      <svg viewBox="0 0 48 36" class="brand-icon">
+        <path fill="#EA4335" d="M4 36h8V16L0 9v23a4 4 0 0 0 4 4z"/>
+        <path fill="#34A853" d="M36 36h8a4 4 0 0 0 4-4V9l-12 7z"/>
+        <path fill="#FBBC05" d="M4 8h40l-4 8-6 4-10-8-10 8-6-4z"/>
+        <path fill="#C5221F" d="M0 9l12 7V16l12-8-4-4H4a4 4 0 0 0-4 4z"/>
+        <path fill="#4285F4" d="M48 9a4 4 0 0 0-4-4H28l-4 4 12 8V16z"/>
+      </svg>
+      <span>Gmail</span>
     </div>
-
-    <div class="topbar-search">
-      <input type="text" id="searchInput" placeholder="Search mail">
-    </div>
-
-    <div class="topbar-right">
-      <button id="themeToggleBtn" class="icon-btn">🌙</button>
-      <button id="notificationBtn" class="icon-btn">🔔</button>
-      <img id="profilePic" class="profile-pic" src="assets/icons/default-user.png" alt="Profile">
-      <div id="profileMenu" class="profile-menu hidden">
-        <p id="profileEmail"></p>
-        <button id="logoutBtn" onclick="logoutUser()">Logout</button>
-      </div>
-    </div>
-  </header>
-
-  <div class="main-layout">
-
-    <!-- SIDEBAR -->
-    <aside id="sidebar">
-      <button id="composeBtn" class="compose-btn">+ Compose</button>
-      <ul class="folder-list">
-        <li class="folder-item active" data-folder="inbox">📥 Inbox</li>
-        <li class="folder-item" data-folder="starred">⭐ Starred</li>
-        <li class="folder-item" data-folder="sent">📤 Sent</li>
-        <li class="folder-item" data-folder="drafts">📝 Drafts</li>
-        <li class="folder-item" data-folder="spam">⚠️ Spam</li>
-        <li class="folder-item" data-folder="trash">🗑️ Trash</li>
-        <li class="folder-item" data-folder="archive">📦 Archive</li>
-      </ul>
-    </aside>
-
-    <!-- EMAIL LIST -->
-    <main id="emailListContainer">
-      <div id="emailListToolbar">
-        <input type="checkbox" id="selectAllEmails">
-        <span id="currentFolderLabel">Inbox</span>
-      </div>
-      <ul id="emailList"><!-- Member 3's emails.js populates this --></ul>
-    </main>
-
-    <!-- READING PANE -->
-    <section id="readingPane" class="hidden">
-      <div id="emailDetail"><!-- Member 4's actions.js populates this --></div>
-    </section>
-
   </div>
 
-  <!-- COMPOSE MODAL -->
-  <div id="composeModal" class="hidden">
+  <div class="topbar-search">
+    <button class="icon-btn search-icon-btn" title="Search">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+    </button>
+    <input type="text" id="searchInput" placeholder="Search mail" autocomplete="off" />
+    <button class="icon-btn filter-btn" title="Show search options">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <div class="topbar-right">
+    <button class="icon-btn" id="notifBtn" title="Notifications">
+      <svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22zm7-6V11a7 7 0 0 0-5.5-6.84V3a1.5 1.5 0 0 0-3 0v1.16A7 7 0 0 0 5 11v5l-2 2v1h18v-1l-2-2z" fill="currentColor"/></svg>
+      <span class="notif-dot" id="notifDot"></span>
+    </button>
+    <button class="icon-btn" id="themeToggleBtn" title="Toggle dark mode">
+      <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.5 5.5 0 0 1-7.54-7.54A9 9 0 0 0 12 3z" fill="currentColor"/></svg>
+    </button>
+    <div class="profile-wrap">
+      <button class="avatar-btn" id="profileBtn" title="Account">
+        <span id="avatarInitial">U</span>
+      </button>
+      <div class="profile-dropdown hidden" id="profileDropdown">
+        <div class="profile-dropdown-header">
+          <div class="avatar-lg" id="avatarInitialLg">U</div>
+          <p class="profile-greeting">Hi, <span id="profileName">User</span>!</p>
+          <p class="profile-email" id="profileEmail">user@gmail.com</p>
+          <button class="manage-btn" disabled>Manage your Account</button>
+        </div>
+        <hr />
+        <button class="dropdown-item" id="logoutBtn">Sign out</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="app-body">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <button class="compose-btn" id="composeBtn">
+      <svg viewBox="0 0 24 24" width="24" height="24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/></svg>
+      <span>Compose</span>
+    </button>
+
+    <nav class="folder-list" id="folderList">
+      <button class="folder-item active" data-folder="inbox">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none"/><path d="M22 12.5V19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6.5l8.4 5.25a3 3 0 0 0 3.2 0L22 12.5zM4 4h16a2 2 0 0 1 2 2v2.2l-9.53 5.96a1 1 0 0 1-1.06 0L2 8.2V6a2 2 0 0 1 2-2z" fill="currentColor"/></svg>
+        <span class="folder-name">Inbox</span>
+        <span class="folder-count" id="countInbox"></span>
+      </button>
+      <button class="folder-item" data-folder="starred">
+        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg>
+        <span class="folder-name">Starred</span>
+      </button>
+      <button class="folder-item" data-folder="snoozed">
+        <svg viewBox="0 0 24 24"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm.5-13v5.25l4.5 2.67-.75 1.23-5.25-3.15V7z" fill="currentColor"/></svg>
+        <span class="folder-name">Snoozed</span>
+      </button>
+      <button class="folder-item" data-folder="sent">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z" fill="currentColor"/></svg>
+        <span class="folder-name">Sent</span>
+      </button>
+      <button class="folder-item" data-folder="drafts">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" fill="currentColor"/></svg>
+        <span class="folder-name">Drafts</span>
+        <span class="folder-count" id="countDrafts"></span>
+      </button>
+      <button class="folder-item" data-folder="important">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM7 9h10v2H7zm0 4h6v2H7z" fill="currentColor"/></svg>
+        <span class="folder-name">Important</span>
+      </button>
+      <button class="folder-item" data-folder="all">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none"/><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+        <span class="folder-name">All Mail</span>
+      </button>
+      <button class="folder-item" data-folder="spam">
+        <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 5l7.53 12H4.47L12 7zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z" fill="currentColor"/></svg>
+        <span class="folder-name">Spam</span>
+      </button>
+      <button class="folder-item" data-folder="trash">
+        <svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7L6 7zm3-4h6l1 2h4v2H4V5h4l1-2z" fill="currentColor"/></svg>
+        <span class="folder-name">Trash</span>
+      </button>
+    </nav>
+
+    <hr class="sidebar-divider" />
+
+    <div class="label-list">
+      <p class="label-heading">Labels</p>
+      <button class="folder-item label-item" data-label="work"><span class="label-dot" style="background:#3949ab"></span><span class="folder-name">Work</span></button>
+      <button class="folder-item label-item" data-label="personal"><span class="label-dot" style="background:#00897b"></span><span class="folder-name">Personal</span></button>
+      <button class="folder-item label-item" data-label="promotions"><span class="label-dot" style="background:#e50914"></span><span class="folder-name">Promotions</span></button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main-content">
+
+    <!-- Toolbar above list -->
+    <div class="list-toolbar">
+      <label class="checkbox-wrap">
+        <input type="checkbox" id="selectAllCheckbox" />
+      </label>
+      <button class="icon-btn small" id="refreshBtn" title="Refresh">
+        <svg viewBox="0 0 24 24"><path d="M17.65 6.35A8 8 0 1 0 20 12h-2a6 6 0 1 1-1.76-4.24L13 11h7V4l-2.35 2.35z" fill="currentColor"/></svg>
+      </button>
+      <button class="icon-btn small" id="archiveBtn" title="Archive">
+        <svg viewBox="0 0 24 24"><path d="M20.55 5.22l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.15.55L3.46 5.22C3.17 5.57 3 6.01 3 6.5V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.5c0-.49-.17-.93-.45-1.28zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12.14l.81 1H5.12z" fill="currentColor"/></svg>
+      </button>
+      <button class="icon-btn small" id="deleteBtn" title="Delete">
+        <svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7L6 7zm3-4h6l1 2h4v2H4V5h4l1-2z" fill="currentColor"/></svg>
+      </button>
+      <button class="icon-btn small" id="markReadBtn" title="Mark as read">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+      </button>
+      <span class="list-toolbar-spacer"></span>
+      <span class="pagination-info" id="paginationInfo"></span>
+    </div>
+
+    <!-- Email list -->
+    <section class="email-list" id="emailList"></section>
+
+    <!-- Empty state -->
+    <div class="empty-state hidden" id="emptyState">
+      <svg viewBox="0 0 200 160" width="140">
+        <ellipse cx="100" cy="140" rx="70" ry="10" fill="#f1f3f4"/>
+        <rect x="40" y="40" width="120" height="80" rx="8" fill="#e8eaed"/>
+        <path d="M40 48l60 40 60-40" fill="none" stroke="#bdc1c6" stroke-width="4"/>
+      </svg>
+      <p id="emptyStateText">No conversations in this folder</p>
+    </div>
+  </main>
+
+  <!-- ============ EMAIL DETAIL VIEW ============ -->
+  <div class="email-detail-overlay hidden" id="emailDetailOverlay">
+    <div class="email-detail">
+      <div class="email-detail-toolbar">
+        <button class="icon-btn" id="backToListBtn" title="Back to inbox">
+          <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z" fill="currentColor"/></svg>
+        </button>
+        <button class="icon-btn" id="detailArchiveBtn" title="Archive"><svg viewBox="0 0 24 24"><path d="M20.55 5.22l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.15.55L3.46 5.22C3.17 5.57 3 6.01 3 6.5V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.5c0-.49-.17-.93-.45-1.28zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5z" fill="currentColor"/></svg></button>
+        <button class="icon-btn" id="detailDeleteBtn" title="Delete"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7L6 7zm3-4h6l1 2h4v2H4V5h4l1-2z" fill="currentColor"/></svg></button>
+        <button class="icon-btn" id="detailUnreadBtn" title="Mark as unread"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg></button>
+        <button class="icon-btn" id="detailStarBtn" title="Star"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg></button>
+      </div>
+      <div class="email-detail-body">
+        <h2 id="detailSubject"></h2>
+        <div class="email-detail-labels" id="detailLabels"></div>
+        <div class="email-detail-sender-row">
+          <div class="avatar-md" id="detailAvatar"></div>
+          <div class="sender-info">
+            <p class="sender-name"><strong id="detailFrom"></strong> <span id="detailFromEmail" class="muted"></span></p>
+            <p class="muted" id="detailToLine">to me</p>
+          </div>
+          <span class="muted" id="detailTime"></span>
+        </div>
+        <pre class="email-detail-content" id="detailContent"></pre>
+
+        <div class="reply-box">
+          <button class="reply-btn" id="replyBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z" fill="currentColor"/></svg>
+            Reply
+          </button>
+          <button class="reply-btn" id="forwardBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M14 9V5l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z" fill="currentColor"/></svg>
+            Forward
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ COMPOSE MODAL ============ -->
+  <div class="compose-modal hidden" id="composeModal">
     <div class="compose-header">
-      <span>New Message</span>
-      <button id="closeComposeBtn">✕</button>
+      <span id="composeTitle">New Message</span>
+      <div class="compose-header-actions">
+        <button class="icon-btn" id="minimizeComposeBtn" title="Minimize">
+          <svg viewBox="0 0 24 24"><path d="M6 19h12v2H6z" fill="currentColor"/></svg>
+        </button>
+        <button class="icon-btn" id="closeComposeBtn" title="Close">
+          <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/></svg>
+        </button>
+      </div>
     </div>
-    <input type="text" id="composeTo" placeholder="To">
-    <input type="text" id="composeSubject" placeholder="Subject">
-    <textarea id="composeBody" placeholder="Message body"></textarea>
-    <div class="compose-actions">
-      <button id="sendEmailBtn">Send</button>
-      <button id="saveDraftBtn">Save Draft</button>
+    <div class="compose-body">
+      <div class="compose-field">
+        <input type="text" id="composeTo" placeholder="To" />
+      </div>
+      <div class="compose-field">
+        <input type="text" id="composeSubject" placeholder="Subject" />
+      </div>
+      <textarea id="composeBody" placeholder="Compose your email..."></textarea>
+    </div>
+    <div class="compose-footer">
+      <button class="send-btn" id="sendBtn">Send</button>
+      <button class="icon-btn" id="deleteDraftBtn" title="Discard draft">
+        <svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7L6 7zm3-4h6l1 2h4v2H4V5h4l1-2z" fill="currentColor"/></svg>
+      </button>
     </div>
   </div>
 
-  <script src="js/login.js"></script>
-  <script src="data\defaultEmail.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/emails.js"></script>
-  <script src="js/folders.js"></script>
-  <script src="js/compose.js"></script>
-  <script src="js/actions.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/profile.js"></script>
-  <script src="js/notification.js"></script>
-  <script src="js/app.js"></script>
+</div>
+
+<!-- Toast notification -->
+<div class="toast hidden" id="toast">
+  <span id="toastMessage"></span>
+  <button id="toastUndo" class="toast-undo hidden">Undo</button>
+</div>
+
+<script src="data/defaultEmails.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/notification.js"></script>
+<script src="js/emails.js"></script>
+<script src="js/folders.js"></script>
+<script src="js/actions.js"></script>
+<script src="js/search.js"></script>
+<script src="js/compose.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

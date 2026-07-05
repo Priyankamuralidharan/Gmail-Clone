@@ -1,37 +1,29 @@
-jsdocument.getElementById('searchInput').addEventListener('input', (e) => {
-  const query = e.target.value.toLowerCase().trim();
-  const emails = getAllEmails().filter(email => email.folder === currentFolder);
+// js/search.js — live search across from, subject, snippet, and body
 
-  const filtered = query
-    ? emails.filter(email =>
-        email.subject.toLowerCase().includes(query) ||
-        email.from.toLowerCase().includes(query) ||
-        email.body.toLowerCase().includes(query)
-      )
-    : emails;
+(function () {
+  const searchInput = document.getElementById("searchInput");
+  let debounceTimer = null;
 
-  renderFilteredEmails(filtered);
-});
-
-function renderFilteredEmails(emails) {
-  const listEl = document.getElementById('emailList');
-  listEl.innerHTML = '';
-
-  if (emails.length === 0) {
-    listEl.innerHTML = '<li class="empty-state">No matching emails</li>';
-    return;
-  }
-
-  emails.forEach(email => {
-    const li = document.createElement('li');
-    li.className = 'email-item' + (email.read ? '' : ' unread');
-    li.innerHTML = `
-      <span class="star-icon" data-id="${email.id}">${email.starred ? '⭐' : '☆'}</span>
-      <span class="email-from">${email.from}</span>
-      <span class="email-subject">${email.subject}</span>
-      <span class="email-date">${new Date(email.date).toLocaleDateString()}</span>
-    `;
-    li.addEventListener('click', () => openEmail(email.id));
-    listEl.appendChild(li);
+  searchInput.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      AppState.searchQuery = searchInput.value;
+      // Searching sweeps across all mail regardless of folder, like real Gmail
+      if (searchInput.value.trim() && AppState.currentFolder !== "all") {
+        AppState.currentFolder = "all";
+        AppState.currentLabel = null;
+        document.querySelectorAll(".folder-item").forEach((b) => b.classList.remove("active"));
+      }
+      EmailsView.render();
+      Actions.closeDetailView();
+    }, 200);
   });
-}
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      searchInput.value = "";
+      AppState.searchQuery = "";
+      EmailsView.render();
+    }
+  });
+})();

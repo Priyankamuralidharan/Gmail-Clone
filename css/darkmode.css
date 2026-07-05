@@ -1,39 +1,20 @@
-cssbody.dark-mode {
-  background: #202124;
-  color: #e8eaed;
+body.dark {
+  --border-color: #3c4043;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --hover-grey: #2d2e30;
+  --bg-primary: #1e1f20;
+  --bg-app: #131314;
 }
 
-body.dark-mode #topbar,
-body.dark-mode #sidebar,
-body.dark-mode #emailListContainer,
-body.dark-mode #readingPane,
-body.dark-mode #composeModal {
-  background: #2d2e30;
-  color: #e8eaed;
-  border-color: #3c4043;
-}
-
-body.dark-mode .email-item {
-  border-color: #3c4043;
-}
-
-body.dark-mode .folder-item.active {
-  background: #3c4043;
-}
-
-body.dark-mode .topbar-search input {
-  background: #3c4043;
-  color: #e8eaed;
-}
-
-.toast-notification {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  background: #333;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  z-index: 1000;
-}
+body.dark .email-row.unread { background: #26282b; }
+body.dark .topbar-search { background: #2d2e30; }
+body.dark .topbar-search:focus-within { background: #303134; box-shadow: none; }
+body.dark .folder-item.active { background: #37384b; }
+body.dark .compose-btn { background: #3c4043; color: #c2e7ff; }
+body.dark .compose-btn:hover { background: #48494c; }
+body.dark .send-btn:disabled { background: #3c4043; color: #6f7276; }
+body.dark .reply-btn { border-color: #5f6368; }
+body.dark .toast { background: #4a4a4a; }
+body.dark .field input,
+body.dark .step { border-color: #3c4043; }

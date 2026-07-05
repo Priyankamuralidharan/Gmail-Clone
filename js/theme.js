@@ -1,14 +1,28 @@
-jsdocument.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
+// js/theme.js — dark / light mode toggle with persistence
 
-function toggleTheme() {
-  document.body.classList.toggle('dark-mode');
-  const isDark = document.body.classList.contains('dark-mode');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-}
+const Theme = (function () {
+  const THEME_KEY = "gmail_clone_theme";
 
-window.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
+  function apply(theme) {
+    document.body.classList.toggle("dark", theme === "dark");
   }
-});
+
+  function init() {
+    const saved = localStorage.getItem(THEME_KEY) || "light";
+    apply(saved);
+  }
+
+  function toggle() {
+    const isDark = document.body.classList.contains("dark");
+    const next = isDark ? "light" : "dark";
+    apply(next);
+    localStorage.setItem(THEME_KEY, next);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("themeToggleBtn");
+    if (btn) btn.addEventListener("click", toggle);
+  });
+
+  return { init, toggle };
+})();
