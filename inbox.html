@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Clone - Inbox</title>
+  <link rel="stylesheet" href="css/topbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/inbox.css">
+  <link rel="stylesheet" href="css/compose.css">
+  <link rel="stylesheet" href="css/email.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header id="topbar">
+    <div class="topbar-left">
+      <button id="menuToggle" class="icon-btn">☰</button>
+      <img src="assets/icons/gmail-logo.png" alt="Gmail" class="topbar-logo">
+      <span class="topbar-title">Gmail</span>
+    </div>
+
+    <div class="topbar-search">
+      <input type="text" id="searchInput" placeholder="Search mail">
+    </div>
+
+    <div class="topbar-right">
+      <button id="themeToggleBtn" class="icon-btn">🌙</button>
+      <button id="notificationBtn" class="icon-btn">🔔</button>
+      <img id="profilePic" class="profile-pic" src="assets/icons/default-user.png" alt="Profile">
+      <div id="profileMenu" class="profile-menu hidden">
+        <p id="profileEmail"></p>
+        <button id="logoutBtn" onclick="logoutUser()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-layout">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <button id="composeBtn" class="compose-btn">+ Compose</button>
+      <ul class="folder-list">
+        <li class="folder-item active" data-folder="inbox">📥 Inbox</li>
+        <li class="folder-item" data-folder="starred">⭐ Starred</li>
+        <li class="folder-item" data-folder="sent">📤 Sent</li>
+        <li class="folder-item" data-folder="drafts">📝 Drafts</li>
+        <li class="folder-item" data-folder="spam">⚠️ Spam</li>
+        <li class="folder-item" data-folder="trash">🗑️ Trash</li>
+        <li class="folder-item" data-folder="archive">📦 Archive</li>
+      </ul>
+    </aside>
+
+    <!-- EMAIL LIST -->
+    <main id="emailListContainer">
+      <div id="emailListToolbar">
+        <input type="checkbox" id="selectAllEmails">
+        <span id="currentFolderLabel">Inbox</span>
+      </div>
+      <ul id="emailList"><!-- Member 3's emails.js populates this --></ul>
+    </main>
+
+    <!-- READING PANE -->
+    <section id="readingPane" class="hidden">
+      <div id="emailDetail"><!-- Member 4's actions.js populates this --></div>
+    </section>
+
+  </div>
+
+  <!-- COMPOSE MODAL -->
+  <div id="composeModal" class="hidden">
+    <div class="compose-header">
+      <span>New Message</span>
+      <button id="closeComposeBtn">✕</button>
+    </div>
+    <input type="text" id="composeTo" placeholder="To">
+    <input type="text" id="composeSubject" placeholder="Subject">
+    <textarea id="composeBody" placeholder="Message body"></textarea>
+    <div class="compose-actions">
+      <button id="sendEmailBtn">Send</button>
+      <button id="saveDraftBtn">Save Draft</button>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+  <script src="data\defaultEmail.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/emails.js"></script>
+  <script src="js/folders.js"></script>
+  <script src="js/compose.js"></script>
+  <script src="js/actions.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/notification.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
