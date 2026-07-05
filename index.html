@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Clone - Sign In</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-box">
+      <img src="assets/icons/gmail-logo.png" alt="Gmail" class="logo">
+      <h1>Sign in</h1>
+      <p class="subtitle">Use your Account</p>
+
+      <form id="loginForm">
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Email" required>
+          <span class="error-message" id="emailError"></span>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="password" placeholder="Password" required>
+          <span class="error-message" id="passwordError"></span>
+        </div>
+
+        <div class="remember-me">
+          <input type="checkbox" id="rememberMe">
+          <label for="rememberMe">Remember me</label>
+        </div>
+
+        <div class="login-actions">
+          <a href="#" class="forgot-link">Forgot password?</a>
+          <button type="submit" id="loginBtn">Next</button>
+        </div>
+      </form>
+
+      <p id="loginStatus" class="status-message"></p>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>
